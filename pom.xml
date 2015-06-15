@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.colvir.bus</groupId>
+		<artifactId>colvir.bus.root</artifactId>
+		<version>1.3.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>kz.bcc.bus.module</groupId>
+	<artifactId>bcc.bus.modules.root</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+	<name>Colvir Payment Gateway Adapters</name>
+
+	<organization>
+		<name>Colvir Software Solutions</name>
+		<url>www.colvir.com</url>
+	</organization>
+
+	<properties>
+		<bus.core.version>1.3.1-SNAPSHOT</bus.core.version>
+		<bus.protocol.version>1.3.1</bus.protocol.version>
+		<jetty.httpserver.version>9.2.5.v20141112</jetty.httpserver.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-server</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-servlet</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-util</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-http</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-security</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-io</artifactId>
+				<version>${jetty.httpserver.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Colvir BUS Dependencies -->
+		<dependency>
+			<groupId>com.colvir.bus</groupId>
+			<artifactId>colvir.bus.core.api</artifactId>
+			<version>${bus.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.colvir.bus</groupId>
+			<artifactId>colvir.bus.core.library</artifactId>
+			<version>${bus.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.colvir.bus</groupId>
+			<artifactId>colvir.bus.test</artifactId>
+			<version>${bus.core.version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<extensions>true</extensions>
+					<configuration>
+						<manifestLocation>target/META-INF</manifestLocation>
+						<instructions>
+							<Bundle-Version>${project.version}</Bundle-Version>
+							<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Vendor>${project.organization.name}</Bundle-Vendor>
+							<Export-Package />
+							<Import-Package>
+								*
+							</Import-Package>
+						</instructions>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>parse-version</id>
+							<goals>
+								<goal>parse-version</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<reporting>
+	</reporting>
+
+	<profiles>
+	</profiles>
+</project>
